@@ -1,2 +1,0 @@
-# ngrx-poc
-ngrx-poc 
