@@ -6,6 +6,7 @@ import { Item } from './models/items.model';
 import { ShoppingService } from './shop.service';
 import { ShopState } from './store/shop.state';
 import * as fromShopActions from './store/shop.actions';
+import { loadedItems } from './store/shop.selector';
 
 @Component({
   selector: 'app-shop',
@@ -13,7 +14,7 @@ import * as fromShopActions from './store/shop.actions';
   styleUrls: ['./shop.component.css'],
 })
 export class ShopComponent implements OnInit {
-  items$: Item[];
+  items$: Observable<Item[]>;
 
   constructor(
     private shopping: ShoppingService,
@@ -21,9 +22,7 @@ export class ShopComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.subscribe((data) => {
-      this.items$ = data.shop.items;
-    });
+    this.items$ = this.store.select(loadedItems);
     this.store.dispatch(fromShopActions.itemLoad({ items: [] }));
   }
 }
