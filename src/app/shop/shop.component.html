@@ -1,0 +1,8 @@
+<div class="display">
+  <mat-card class="shop_item" *ngFor="let item of items$ | async">
+    <mat-card-header>
+      <mat-card-title>{{ item.title }}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="item.image" />
+  </mat-card>
+</div>
